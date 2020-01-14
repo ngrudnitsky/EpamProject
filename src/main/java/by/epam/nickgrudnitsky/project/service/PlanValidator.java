@@ -1,6 +1,6 @@
 package by.epam.nickgrudnitsky.project.service;
 
-import by.epam.nickgrudnitsky.project.exceptions.PlanValidationException;
+import by.epam.nickgrudnitsky.project.exception.PlanValidationException;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -19,9 +19,8 @@ class PlanValidator {
     }
 
     private static boolean validatePlan(List<String> plan) {
+
         //проверяем корректность названия тарифа и продолжаем валидацию, если все верно
-
-
         if (validateName(plan.get(0))) {
 
             for (int i = 1; i < plan.size(); i++) {

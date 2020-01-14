@@ -1,4 +1,4 @@
-package by.epam.nickgrudnitsky.project.entities;
+package by.epam.nickgrudnitsky.project.entitie;
 
 abstract class HomePlan extends Plan {
 

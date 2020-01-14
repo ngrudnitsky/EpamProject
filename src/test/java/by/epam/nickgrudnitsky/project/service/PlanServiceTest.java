@@ -1,6 +1,6 @@
 package by.epam.nickgrudnitsky.project.service;
 
-import by.epam.nickgrudnitsky.project.entities.Plan;
+import by.epam.nickgrudnitsky.project.entitie.Plan;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -2,7 +2,7 @@ package by.epam.nickgrudnitsky.project.service;
 
 
 import by.epam.nickgrudnitsky.project.data.PlanRepository;
-import by.epam.nickgrudnitsky.project.entities.Plan;
+import by.epam.nickgrudnitsky.project.entitie.Plan;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -46,7 +46,8 @@ class PlanService {
         return planRepository.getPlans();
     }
 
-    List<Plan> sortBySubscriptionFee() {  //сортировка тарифов по абонентской плате
+    //сортировка тарифов по абонентской плате
+    List<Plan> sortBySubscriptionFee() {
         List<Plan> plans = planRepository.getPlans();
 
         plans.sort(new SubscriptionFeeComparator());
@@ -54,7 +55,8 @@ class PlanService {
         return plans;
     }
 
-    List<Plan> sortByInternetTraffic() { //сортировка тарифов по включенному интернет трафику
+    //сортировка тарифов по включенному интернет трафику
+    List<Plan> sortByInternetTraffic() {
         List<Plan> plans = planRepository.getPlans();
 
         plans.sort(new InternetTrafficComparator().reversed());
@@ -62,8 +64,9 @@ class PlanService {
         return plans;
     }
 
-    List<Plan> sortByInternetTrafficAndFee() { //сортировка тарифов по включенному интернет трафику
-        List<Plan> plans = planRepository.getPlans();  //и абонентской плате
+    //сортировка тарифов по включенному интернет трафику и абонентской плате
+    List<Plan> sortByInternetTrafficAndFee() {
+        List<Plan> plans = planRepository.getPlans();
 
         plans.sort(new InternetTrafficComparator().thenComparing(new SubscriptionFeeComparator()));
         log.info("Тарифы отсортированны по цене абонентской платы и количеству включенного интернет трафика.");
