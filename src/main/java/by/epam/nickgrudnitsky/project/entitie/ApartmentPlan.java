@@ -1,4 +1,6 @@
-package by.epam.nickgrudnitsky.project.entities;
+package by.epam.nickgrudnitsky.project.entitie;
+
+import java.util.Objects;
 
 //тарифы для квартиры
 public class ApartmentPlan extends HomePlan {
@@ -42,5 +44,26 @@ public class ApartmentPlan extends HomePlan {
                 "\nВключено интернет трафика " + this.getVolumeOfInternetTraffic() +
                 "\nабонентская плата " + this.getSubscriptionFee() +
                 "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ApartmentPlan that = (ApartmentPlan) o;
+        return accessSpeed == that.accessSpeed &&
+                this.isDrWebAntivirus() == that.isDrWebAntivirus() &&
+                this.isWifiRouter() == that.isWifiRouter() &&
+                this.isTv() == that.isTv()&&
+                this.getName().equals(that.getName()) &&
+                this.getVolumeOfInternetTraffic() == that.getVolumeOfInternetTraffic() &&
+                this.getSubscriptionFee() == that.getSubscriptionFee() &&
+                this.getConnectedSubscribers() == that.getConnectedSubscribers() &&
+                this.getConnectionPrice() == that.getConnectionPrice();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accessSpeed);
     }
 }

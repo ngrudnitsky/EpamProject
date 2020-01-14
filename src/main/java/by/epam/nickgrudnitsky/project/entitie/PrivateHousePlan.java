@@ -1,5 +1,7 @@
-package by.epam.nickgrudnitsky.project.entities;
+package by.epam.nickgrudnitsky.project.entitie;
 
+
+import java.util.Objects;
 
 //тарифы для частного дома
 public class PrivateHousePlan extends HomePlan {
@@ -51,5 +53,29 @@ public class PrivateHousePlan extends HomePlan {
                 "\nВключено интернет трафика " + this.getVolumeOfInternetTraffic() +
                 "\nабонентская плата " + this.getSubscriptionFee() +
                 "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        PrivateHousePlan that = (PrivateHousePlan) o;
+        return Double.compare(that.getTrafficVolumeOn1MbeatSpeed(), getTrafficVolumeOn1MbeatSpeed()) == 0 &&
+                Double.compare(that.getTurboButtonCost(), getTurboButtonCost()) == 0 &&
+                this.getName().equals(that.getName()) &&
+                this.getVolumeOfInternetTraffic() == that.getVolumeOfInternetTraffic() &&
+                this.getSubscriptionFee() == that.getSubscriptionFee() &&
+                this.getConnectedSubscribers() == that.getConnectedSubscribers() &&
+                this.getConnectionPrice() == that.getConnectionPrice() &&
+                this.isDrWebAntivirus() == that.isDrWebAntivirus() &&
+                this.isWifiRouter() == that.isWifiRouter() &&
+                this.isTv() == that.isTv();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getTrafficVolumeOn1MbeatSpeed(), getTurboButtonCost());
     }
 }

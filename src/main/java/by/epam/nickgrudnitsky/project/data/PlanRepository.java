@@ -1,10 +1,10 @@
 package by.epam.nickgrudnitsky.project.data;
 
 
-import by.epam.nickgrudnitsky.project.entities.ApartmentPlan;
-import by.epam.nickgrudnitsky.project.entities.CellularPlan;
-import by.epam.nickgrudnitsky.project.entities.Plan;
-import by.epam.nickgrudnitsky.project.entities.PrivateHousePlan;
+import by.epam.nickgrudnitsky.project.entitie.ApartmentPlan;
+import by.epam.nickgrudnitsky.project.entitie.CellularPlan;
+import by.epam.nickgrudnitsky.project.entitie.Plan;
+import by.epam.nickgrudnitsky.project.entitie.PrivateHousePlan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,17 @@ import java.util.List;
 //Класс, который работает со всей базой тарифных планов (замена базы данных)
 
 public class PlanRepository {
-    private List<Plan> plans = new ArrayList<>();  //тут хранятся все прочитанные тарифы
 
+    //тут хранятся все прочитанные тарифы
+    private List<Plan> plans = new ArrayList<>();
+
+    //добавление плана в базу
     private void addPlan(Plan plan) {
         plans.add(plan);
-    } //добавление плана в базу
+    }
 
-    public List<Plan> createPlans(List<List<String>> plansInfo){ //создание планов из входных данных
+    //создание планов из входных данных
+    public List<Plan> createPlans(List<List<String>> plansInfo){
 
         for (List<String> planInfo : plansInfo) {
 
