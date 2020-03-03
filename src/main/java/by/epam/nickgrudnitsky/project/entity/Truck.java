@@ -43,14 +43,27 @@ public class Truck extends Auto {
         return getMark() + " " + getModel();
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Truck truck = (Truck) o;
+
+        if (getNumberOfAxles() != truck.getNumberOfAxles()) return false;
+        if (isOpenBodyType() != truck.isOpenBodyType()) return false;
+        if (isTrailer() != truck.isTrailer()) return false;
+        return getWheelFormula() != null ? getWheelFormula().equals(truck.getWheelFormula()) : truck.getWheelFormula() == null;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = super.hashCode();
+        result = 31 * result + getNumberOfAxles();
+        result = 31 * result + (getWheelFormula() != null ? getWheelFormula().hashCode() : 0);
+        result = 31 * result + (isOpenBodyType() ? 1 : 0);
+        result = 31 * result + (isTrailer() ? 1 : 0);
+        return result;
     }
 }

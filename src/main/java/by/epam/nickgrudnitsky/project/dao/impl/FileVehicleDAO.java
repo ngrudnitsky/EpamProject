@@ -13,12 +13,12 @@ import java.util.*;
 
 public class FileVehicleDAO implements VehicleDAO {
     private Map<String, Vehicle> vehicles = new HashMap<>();
+    private static final String FILE_NAME = "src/main/resources/vehicleList.txt";
 
     public FileVehicleDAO() {
-        File vehiclesProperties = new File("src/main/resources/vehicleList.txt");
-        List<List<String>> vehiclesData = VehicleFileReader.readPlansFromFile(vehiclesProperties);
-        List<Vehicle> readeVehicles = VehicleFileReader.createVehicle(vehiclesData);
-
+        File vehiclesProperties = new File(FILE_NAME);
+        List<Vehicle> readeVehicles;
+        readeVehicles = VehicleFileReader.createVehicles(vehiclesProperties);
         for (Vehicle vehicle : readeVehicles) {
             this.vehicles.put(vehicle.getId(), vehicle);
         }
@@ -26,21 +26,33 @@ public class FileVehicleDAO implements VehicleDAO {
 
     @Override
     public void addVehicle(Vehicle vehicle) throws DAOException {
+        if (vehicle == null) {
+            throw new DAOException("Null vehicle was added.");
+        }
         vehicles.put(vehicle.getId(), vehicle);
     }
 
     @Override
     public void deleteVehicle(String id) throws DAOException {
+        if (id == null){
+            throw new DAOException("Tried to delete vehicle with Null id.");
+        }
         vehicles.remove(id);
     }
 
     @Override
     public Vehicle findById(String id) throws DAOException {
+        if (id == null){
+            throw new DAOException("Tried to find vehicle by Null id.\n");
+        }
         return vehicles.get(id);
     }
 
     @Override
     public Map<String, Vehicle> getAll() throws DAOException {
+        if (vehicles.isEmpty()){
+            throw new DAOException("There are no vehicles.\n");
+        }
         return vehicles;
     }
 
@@ -53,7 +65,9 @@ public class FileVehicleDAO implements VehicleDAO {
                 trucks.add((Truck) vehicle);
             }
         }
-
+        if (trucks.isEmpty()) {
+            throw new DAOException("There are no trucks.\n");
+        }
         return trucks;
     }
 
@@ -66,7 +80,9 @@ public class FileVehicleDAO implements VehicleDAO {
                 cargoAirplanes.add((CargoAirplane) vehicle);
             }
         }
-
+        if (cargoAirplanes.isEmpty()) {
+            throw new DAOException("There are no cargo airplanes.\n");
+        }
         return cargoAirplanes;
     }
 
@@ -79,7 +95,9 @@ public class FileVehicleDAO implements VehicleDAO {
                 cargoShips.add((CargoShip) vehicle);
             }
         }
-
+        if (cargoShips.isEmpty()) {
+            throw new DAOException("There are no cargo ships.\n");
+        }
         return cargoShips;
     }
 }

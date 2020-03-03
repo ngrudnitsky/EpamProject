@@ -3,3 +3,19 @@
 2020-03-03 11:08:16 INFO  VehicleServiceImpl:85 - Get all cargo airplanes
 2020-03-03 11:08:17 INFO  VehicleServiceImpl:95 - Get all cargo ships
 2020-03-03 11:08:25 INFO  VehicleServiceImpl:65 - Get all vehicles
+2020-03-03 21:53:52 ERROR VehicleFileReader:34 - Vehicle initialisation exception.
+2020-03-03 21:53:55 INFO  VehicleServiceImpl:69 - Get all vehicles
+2020-03-03 21:53:55 ERROR Command:15 - by.epam.nickgrudnitsky.project.exception.DAOException: There are no vehicles.
+2020-03-03 21:56:27 INFO  VehicleServiceImpl:69 - Get all vehicles
+2020-03-03 21:56:36 ERROR VehicleFileReader:34 - Vehicle initialisation exception.
+2020-03-03 21:56:37 INFO  VehicleServiceImpl:69 - Get all vehicles
+2020-03-03 21:56:37 ERROR Command:15 - There are no vehicles.
+
+2020-03-03 22:08:40 INFO  VehicleServiceImpl:69 - Get all vehicles
+2020-03-03 22:08:41 INFO  VehicleServiceImpl:79 - Get all trucks
+2020-03-03 22:08:43 INFO  VehicleServiceImpl:89 - Get all cargo airplanes
+2020-03-03 22:08:44 INFO  VehicleServiceImpl:99 - Get all cargo ships
+2020-03-03 23:01:30 INFO  VehicleServiceImpl:69 - Get all vehicles
+2020-03-03 23:01:31 INFO  VehicleServiceImpl:79 - Get all trucks
+2020-03-03 23:01:32 INFO  VehicleServiceImpl:89 - Get all cargo airplanes
+2020-03-03 23:01:35 INFO  VehicleServiceImpl:99 - Get all cargo ships

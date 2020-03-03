@@ -20,14 +20,25 @@ public abstract class Auto extends Vehicle {
         this.engineCapacity = engineCapacity;
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Auto auto = (Auto) o;
+
+        if (Double.compare(auto.getEngineCapacity(), getEngineCapacity()) != 0) return false;
+        return getTypeOfDrive() != null ? getTypeOfDrive().equals(auto.getTypeOfDrive()) : auto.getTypeOfDrive() == null;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = super.hashCode();
+        long temp;
+        result = 31 * result + (getTypeOfDrive() != null ? getTypeOfDrive().hashCode() : 0);
+        temp = Double.doubleToLongBits(getEngineCapacity());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }

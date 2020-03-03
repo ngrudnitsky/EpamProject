@@ -1,7 +1,5 @@
 package by.epam.nickgrudnitsky.project.entity;
 
-import java.util.Objects;
-
 public abstract class Airplane extends Vehicle {
     private double speed;
 
@@ -13,14 +11,23 @@ public abstract class Airplane extends Vehicle {
         this.speed = speed;
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Airplane airplane = (Airplane) o;
+
+        return Double.compare(airplane.getSpeed(), getSpeed()) == 0;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = super.hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(getSpeed());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
