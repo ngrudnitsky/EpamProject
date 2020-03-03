@@ -1,6 +1,8 @@
 package by.epam.nickgrudnitsky.project.entity;
 
-public abstract class Vehicle {
+import java.io.Serializable;
+
+public abstract class Vehicle implements Serializable {
     private String id;
     private String mark;
     private String model;
@@ -47,14 +49,31 @@ public abstract class Vehicle {
         this.carryingCapacity = carryingCapacity;
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vehicle vehicle = (Vehicle) o;
+
+        if (Double.compare(vehicle.getWeight(), getWeight()) != 0) return false;
+        if (Double.compare(vehicle.getCarryingCapacity(), getCarryingCapacity()) != 0) return false;
+        if (getId() != null ? !getId().equals(vehicle.getId()) : vehicle.getId() != null) return false;
+        if (getMark() != null ? !getMark().equals(vehicle.getMark()) : vehicle.getMark() != null) return false;
+        return getModel() != null ? getModel().equals(vehicle.getModel()) : vehicle.getModel() == null;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result;
+        long temp;
+        result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getMark() != null ? getMark().hashCode() : 0);
+        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
+        temp = Double.doubleToLongBits(getWeight());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getCarryingCapacity());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }

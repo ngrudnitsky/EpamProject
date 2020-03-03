@@ -2,11 +2,13 @@ package by.epam.nickgrudnitsky.project.controller;
 
 import by.epam.nickgrudnitsky.project.controller.command.Command;
 import by.epam.nickgrudnitsky.project.controller.command.impl.*;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandProvider {
+    private final Logger logger = Logger.getLogger(CommandProvider.class);
     private final Map<CommandName, Command> commands = new HashMap<>();
 
     CommandProvider() {
@@ -22,11 +24,11 @@ public class CommandProvider {
         Command command;
 
         try {
-            commandName = CommandName.valueOf(name.toUpperCase().replaceAll(" ", "_"));
+            commandName = CommandName.valueOf(name.toUpperCase().replace(" ", "_"));
             command = commands.get(commandName);
         } catch (IllegalArgumentException | NullPointerException e) {
-            // TODO: 3/3/20 write log
             command = commands.get(CommandName.WRONG_REQUEST);
+            logger.error("Wrong command " + name);
         }
         return command;
     }

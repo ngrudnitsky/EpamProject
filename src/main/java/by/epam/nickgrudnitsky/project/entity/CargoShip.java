@@ -17,14 +17,21 @@ public class CargoShip extends Ship {
         return getMark() + " " + getModel();
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        CargoShip cargoShip = (CargoShip) o;
+
+        return getDecksNumber() == cargoShip.getDecksNumber();
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = super.hashCode();
+        result = 31 * result + getDecksNumber();
+        return result;
     }
 }

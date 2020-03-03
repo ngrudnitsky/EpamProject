@@ -16,6 +16,7 @@ import java.util.Collection;
 public class VehicleServiceImpl implements VehicleService {
     static final Logger logger = Logger.getLogger(VehicleServiceImpl.class);
     private final VehicleDAO vehicleDAO;
+    private static final String ID_PATTERN = "[0-9]{4}[AST]";
 
     public VehicleServiceImpl() {
         DAOFactory daoFactory = DAOFactory.getInstance();
@@ -31,17 +32,20 @@ public class VehicleServiceImpl implements VehicleService {
             vehicleDAO.addVehicle(vehicle);
             logger.info(String.format("Vehicle %s added", vehicle.toString()));
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
     @Override
     public void deleteVehicle(String id) throws ServiceException {
+        if (id == null || !id.matches(ID_PATTERN)) {
+            throw new ServiceException("Incorrect id - " + id);
+        }
         try {
             vehicleDAO.deleteVehicle(id);
             logger.info(String.format("Vehicle with id %s was deleted", id));
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -55,7 +59,7 @@ public class VehicleServiceImpl implements VehicleService {
             }
             throw new ServiceException(String.format("Vehicle with id %s wasn't found", id));
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -65,7 +69,7 @@ public class VehicleServiceImpl implements VehicleService {
             logger.info("Get all vehicles");
             return vehicleDAO.getAll().values();
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -75,7 +79,7 @@ public class VehicleServiceImpl implements VehicleService {
             logger.info("Get all trucks");
             return vehicleDAO.getAllTrucks();
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -85,7 +89,7 @@ public class VehicleServiceImpl implements VehicleService {
             logger.info("Get all cargo airplanes");
             return vehicleDAO.getAllCargoAirplanes();
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 
@@ -95,7 +99,7 @@ public class VehicleServiceImpl implements VehicleService {
             logger.info("Get all cargo ships");
             return vehicleDAO.getAllCargoShips();
         } catch (DAOException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e.getMessage());
         }
     }
 }

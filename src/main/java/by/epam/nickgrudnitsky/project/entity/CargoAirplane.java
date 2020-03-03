@@ -25,14 +25,26 @@ public class CargoAirplane extends Airplane {
         return getMark() + " " + getModel();
     }
 
-    // TODO: 3/3/20
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        CargoAirplane airplane = (CargoAirplane) o;
+
+        if (Double.compare(airplane.getCargoCompartmentVolume(), getCargoCompartmentVolume()) != 0) return false;
+        return Double.compare(airplane.getRangeOfFlight(), getRangeOfFlight()) == 0;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = super.hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(getCargoCompartmentVolume());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(getRangeOfFlight());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
