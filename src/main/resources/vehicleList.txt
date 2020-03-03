@@ -1,0 +1,32 @@
+Truck
+id = 0001T
+mark = Ford
+model = f-max
+weight = 18000
+carryingCapacity = 11.5
+typeOfDrive = petrol
+engineCapacity = 12740
+numberOfAxles = 2
+wheelFormula = 4х2
+openBodyType = false
+trailer = true
+
+Cargo Ship
+id = 0001S
+mark = Moller
+model = Marsk Mc-Kinney
+weight = 194.849
+carryingCapacity = 18.270
+speed = 43
+cruisingRange = 25000
+decksNumber = 1
+
+Cargo Airplane
+id = 0001A
+mark = Boeing
+model = 747-8
+weight = 447
+carryingCapacity = 140000
+speed = 917
+cargoCompartmentVolume = 1533
+rangeOfFlight = 8130
