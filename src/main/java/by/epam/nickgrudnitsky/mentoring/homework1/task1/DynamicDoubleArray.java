@@ -1,27 +1,30 @@
 package by.epam.nickgrudnitsky.mentoring.homework1.task1;
 
 public class DynamicDoubleArray {
-    private double[] array;
-    private int capacity = 1;
+    private double[] array = new double[1];
+    private int capacity = 0;
     private int size = 0;
 
     public DynamicDoubleArray() {
-        array = new double[1];
+
     }
 
     public DynamicDoubleArray(int capacity) {
-        array = new double[capacity];
-        this.capacity = capacity;
+        ensureCapacity(capacity);
     }
 
     public void add(double element) {
         if (size == capacity) {
-            capacity = array.length + 1;
-            double[] newArray = new double[capacity];
-            System.arraycopy(array, 0, newArray, 0, array.length);
-            array = newArray;
+            ensureCapacity(1);
         }
         array[size++] = element;
+    }
+
+    private void ensureCapacity(int increaseBy) {
+        double[] newArray = new double[capacity + increaseBy];
+        System.arraycopy(array, 0, newArray, 0, capacity);
+        array = newArray;
+        capacity += increaseBy;
     }
 
     public double get(int index) {
@@ -32,13 +35,13 @@ public class DynamicDoubleArray {
     }
 
     public void remove(int index) {
-        double[] newArray = new double[array.length - 1];
-
-        if (array.length - 1 >= index) {
-            System.arraycopy(array, index + 1, array, index, array.length - 1 - index);
+        if (index<size && index>=0) {
+            for(int i=index;i<size-1;i++){
+                array[i] = array[i+1];
+            }
+            array[size-1]=0;
+            size--;
         }
-        System.arraycopy(array, 0, newArray, 0, array.length - 1);
-        array = newArray;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class DynamicDoubleArray {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < size; i++) {
             sb.append(array[i]);
-            if (i == size - 1){
+            if (i == size - 1) {
                 break;
             }
             sb.append(", ");

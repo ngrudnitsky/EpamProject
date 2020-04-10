@@ -22,32 +22,35 @@ public class AlgorithmService {
     private Printer printer;
 
     public AlgorithmService() {
-        MontyHallProblem montyHallProblem = null;
-        BirthdayProblem birthdayProblem = null;
-        MarriageProblem marriageProblem = null;
+        initializeStartupMeany();
+    }
 
+    private void initializeStartupMeany() {
         try {
-            montyHallProblem = (MontyHallProblem) Class.forName(MontyHallProblem.class.getName()).newInstance();
-            birthdayProblem = (BirthdayProblem) Class.forName(BirthdayProblem.class.getName()).newInstance();
-            marriageProblem = (MarriageProblem) Class.forName(MarriageProblem.class.getName()).newInstance();
+            addMeanyItem((MontyHallProblem) Class.forName(MontyHallProblem.class.getName()).newInstance());
+            addMeanyItem((BirthdayProblem) Class.forName(BirthdayProblem.class.getName()).newInstance());
+            addMeanyItem((MarriageProblem) Class.forName(MarriageProblem.class.getName()).newInstance());
 
-            Field montyName = montyHallProblem.getClass().getSuperclass().getDeclaredField("name");
-            Field birthdayName = birthdayProblem.getClass().getSuperclass().getDeclaredField("name");
-            Field marriageName = marriageProblem.getClass().getSuperclass().getDeclaredField("name");
-            montyName.setAccessible(true);
-            birthdayName.setAccessible(true);
-            marriageName.setAccessible(true);
-            montyName.set(montyHallProblem, "Reflection Monty");
-            birthdayName.set(birthdayProblem, "Reflection Birthday");
-            marriageName.set(marriageProblem, "Reflection Marriage");
-
-        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException | NoSuchFieldException e) {
+            changePrivateFieldWithoutSetter();
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
-        startupMenu.put(1, montyHallProblem);
-        startupMenu.put(2, birthdayProblem);
-        startupMenu.put(3, marriageProblem);
+    private void changePrivateFieldWithoutSetter() {
+        try {
+            for (Problem value : startupMenu.values()) {
+                Field nameField = value.getClass().getSuperclass().getDeclaredField("name");
+                nameField.setAccessible(true);
+                nameField.set(value, "Used reflection API to fill private fields without setters");
+            }
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addMeanyItem(Problem problem) {
+        startupMenu.put(startupMenu.size() + 1, problem);
     }
 
     public void runProgram(Printer printer) {
@@ -67,11 +70,11 @@ public class AlgorithmService {
     }
 
     private void process(int menuItem) {
-        if (menuItem == 0) {
-            return;
-        }
-        Problem problem = startupMenu.get(menuItem);
         try {
+            if (menuItem == 0) {
+                return;
+            }
+            Problem problem = startupMenu.get(menuItem);
             Method checkAlgorithmMethod = problem.getClass().getDeclaredMethod("checkAlgorithm", Printer.class);
             checkAlgorithmMethod.invoke(problem, printer);
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
