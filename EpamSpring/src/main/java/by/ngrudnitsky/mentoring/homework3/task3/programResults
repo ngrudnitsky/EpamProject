@@ -1,0 +1,21 @@
+January:
+Position: 'Junior backend developer', salary = 86.62, employees = [Bob, Dan]
+Position: 'Senior backend developer', salary = 300.00, employees = [John]
+Position: 'Middle backend developer', salary = 180.00, employees = [Steve]
+Position: 'Project team leader', salary = 450.00, employees = [Ban]
+February:
+Stable environment, some salaries are rising
+Position: 'Junior backend developer', salary = 212.87, employees = [Bob, Dan]
+March:
+Steve was fired.
+Crisis! Some salaries are down!
+Position: 'Middle backend developer', salary = 44.31, employees = []
+April:
+Mike was hired.
+Position: 'Middle backend developer', salary = 44.31, employees = [Mike]
+May:
+John was fired.
+Position: 'Senior backend developer', salary = 300.00, employees = []
+June:
+Position senior backend developer was abolished.
+[Position: 'Junior backend developer', salary = 212.87, employees = [Bob, Dan], Position: 'Middle backend developer', salary = 44.31, employees = [Mike], Position: 'Project team leader', salary = 450.00, employees = [Ban]]

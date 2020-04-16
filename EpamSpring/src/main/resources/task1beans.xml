@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+    <!-- bean definitions here -->
+    <context:annotation-config/>
+
+    <bean id="ProgramRunner" class="by.ngrudnitsky.mentoring.homework3.task1.ProgramRunner" autowire="byType"/>
+
+    <bean id="EmployeeService" class="by.ngrudnitsky.mentoring.homework3.task1.service.EmployeeService"/>
+    <bean id="PositionService" class="by.ngrudnitsky.mentoring.homework3.task1.service.PositionService"/>
+    <bean id="SalaryService" class="by.ngrudnitsky.mentoring.homework3.task1.service.SalaryService"/>
+
+    <bean id="JunSalary" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Salary">
+        <constructor-arg value="#{ T(java.lang.Math).random() * 100.0 }"/>
+    </bean>
+    <bean id="SeniorSalary" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Salary">
+        <constructor-arg value="300"/>
+    </bean>
+    <bean id="MiddleSalary" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Salary">
+        <constructor-arg value="180"/>
+    </bean>
+    <bean id="TeamLeaderSalary" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Salary">
+        <constructor-arg value="450"/>
+    </bean>
+
+    <bean id="Junior backend developer" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Position">
+        <constructor-arg value="Junior backend developer"/>
+        <constructor-arg ref="JunSalary"/>
+    </bean>
+
+    <bean id="Middle backend developer" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Position">
+        <constructor-arg value="Middle backend developer"/>
+        <constructor-arg ref="MiddleSalary"/>
+    </bean>
+
+    <bean id="Senior backend developer" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Position">
+        <constructor-arg value="Senior backend developer"/>
+        <constructor-arg ref="SeniorSalary"/>
+    </bean>
+
+    <bean id="Project team leader" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Position">
+        <constructor-arg value="Project team leader"/>
+        <constructor-arg ref="TeamLeaderSalary"/>
+    </bean>
+
+    <bean id="Bob" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="Bob"/>
+    </bean>
+
+    <bean id="Dan" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="Dan"/>
+    </bean>
+
+    <bean id="John" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="John"/>
+    </bean>
+
+    <bean id="Steve" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="Steve"/>
+    </bean>
+
+    <bean id="Ban" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="Ban"/>
+    </bean>
+
+    <bean id="Mike" class="by.ngrudnitsky.mentoring.homework3.task1.beans.Employee">
+        <constructor-arg value="Mike"/>
+    </bean>
+
+</beans>
